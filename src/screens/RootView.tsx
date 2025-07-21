@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 export default function AppRoot() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="RootScreen" component={PokemonStackScreen} options={{ title: 'Pokemon List' }} />
+      <Tab.Screen name="RootScreen" component={PokemonStackScreen} options={{ title: 'Pokemon List', headerShown: false }} />
       <Tab.Screen name="NewAppScreen" component={ReactNativeAppScreen} options={{ title: 'New App Screen!' }} />
     </Tab.Navigator>
   );

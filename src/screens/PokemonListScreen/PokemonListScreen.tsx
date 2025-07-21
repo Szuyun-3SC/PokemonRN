@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SearchBar } from 'react-native-elements';
 import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PokemonDetailsScreen from '../PokemonDetailsScreen/PokemonDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -9,7 +10,7 @@ export default function PokemonStackScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="PokemonList" component={PokemonListScreen} options={{ title: 'Pokemon List' }} />
-      <Stack.Screen name="PokemonDetail" component={PokemonDetailScreen} options={{ title: 'Pokemon Detail' }} />
+      <Stack.Screen name="PokemonDetail" component={PokemonDetailsScreen} options={{ title: 'Pokemon Detail' }} />
     </Stack.Navigator>
   );
 }
@@ -52,15 +53,18 @@ const PokemonListScreen = ({navigation}: any) => {
   return (
     <>
       <SearchBar
-        placeholder="Search Pokémon..."
-        onChangeText={setSearch as any}
-        value={search}
-        lightTheme
-        round
-        platform="default"
-        containerStyle={{ backgroundColor: 'white' }}
-        inputContainerStyle={{ backgroundColor: '#eee' }}
-      />
+              placeholder="Search Pokémon..."
+              onChangeText={setSearch as any}
+              value={search}
+              lightTheme
+              round
+              platform="default"
+              containerStyle={{ backgroundColor: 'white' }}
+              inputContainerStyle={{ backgroundColor: '#eee' }}
+              showLoading={false}
+              cancelButtonTitle={''}
+              showCancel={true}
+            />
       <FlatList<Pokemon>
         data={filteredPokemons}
         keyExtractor={item => item.name}
@@ -69,15 +73,5 @@ const PokemonListScreen = ({navigation}: any) => {
         contentContainerStyle={{ backgroundColor: '#fff', paddingVertical: 8 }}
       />
     </>
-  );
-};
-
-const PokemonDetailScreen = ({ route }: any) => {
-  const { name, url } = route.params;
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 24, marginBottom: 12 }}>{name}</Text>
-      <Text style={{ fontSize: 16, color: '#888' }}>{url}</Text>
-    </View>
   );
 };
