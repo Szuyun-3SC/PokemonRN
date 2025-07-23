@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { SearchBar } from 'react-native-elements';
-import { Text, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PokemonDetailsScreen from '../PokemonDetailsScreen/PokemonDetailsScreen';
 
@@ -9,14 +15,22 @@ const Stack = createNativeStackNavigator();
 export default function PokemonStackScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="PokemonList" component={PokemonListScreen} options={{ title: 'Pokemon List' }} />
-      <Stack.Screen name="PokemonDetail" component={PokemonDetailsScreen} options={{ title: 'Pokemon Detail' }} />
+      <Stack.Screen
+        name="PokemonList"
+        component={PokemonListScreen}
+        options={{ title: 'Pokemon List' }}
+      />
+      <Stack.Screen
+        name="PokemonDetail"
+        component={PokemonDetailsScreen}
+        options={{ title: 'Pokemon Detail' }}
+      />
     </Stack.Navigator>
   );
 }
 
-const PokemonListScreen = ({navigation}: any) => {
-  type Pokemon = { name: string; url: string; };
+const PokemonListScreen = ({ navigation }: any) => {
+  type Pokemon = { name: string; url: string };
   const [pokemons, setPokemons] = React.useState<Pokemon[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<null | Error>(null);
@@ -24,22 +38,24 @@ const PokemonListScreen = ({navigation}: any) => {
 
   React.useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
-      .then((response) => response.json())
-      .then((json) => setPokemons(json.results))
-      .catch((err) => setError(err))
+      .then(response => response.json())
+      .then(json => setPokemons(json.results))
+      .catch(err => setError(err))
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <ActivityIndicator size="large" style={{flex: 1}} />;
+  if (loading) return <ActivityIndicator size="large" style={{ flex: 1 }} />;
   if (error) return <Text>Error loading pokemons.</Text>;
 
   const filteredPokemons = pokemons.filter(p =>
-    p.name.toLowerCase().includes(search.toLowerCase())
+    p.name.toLowerCase().includes(search.toLowerCase()),
   );
 
   const renderItem = ({ item }: { item: Pokemon }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('PokemonDetail', { name: item.name, url: item.url })}
+      onPress={() =>
+        navigation.navigate('PokemonDetail', { name: item.name, url: item.url })
+      }
       style={{ paddingVertical: 16, paddingHorizontal: 20 }}
     >
       <Text style={{ fontSize: 18 }}>{item.name}</Text>
@@ -47,24 +63,26 @@ const PokemonListScreen = ({navigation}: any) => {
   );
 
   const ItemSeparator = () => (
-    <View style={{ height: 1, backgroundColor: '#e0e0e0', marginHorizontal: 10 }} />
+    <View
+      style={{ height: 1, backgroundColor: '#e0e0e0', marginHorizontal: 10 }}
+    />
   );
 
   return (
     <>
       <SearchBar
-              placeholder="Search Pokémon..."
-              onChangeText={setSearch as any}
-              value={search}
-              lightTheme
-              round
-              platform="default"
-              containerStyle={{ backgroundColor: 'white' }}
-              inputContainerStyle={{ backgroundColor: '#eee' }}
-              showLoading={false}
-              cancelButtonTitle={''}
-              showCancel={true}
-            />
+        placeholder="Search Pokémon..."
+        onChangeText={setSearch as any}
+        value={search}
+        lightTheme
+        round
+        platform="default"
+        containerStyle={{ backgroundColor: 'white' }}
+        inputContainerStyle={{ backgroundColor: '#eee' }}
+        showLoading={false}
+        cancelButtonTitle={''}
+        showCancel={true}
+      />
       <FlatList<Pokemon>
         data={filteredPokemons}
         keyExtractor={item => item.name}
