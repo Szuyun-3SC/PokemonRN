@@ -21,6 +21,8 @@ A simple React Native app to browse and search Pokémon using the [PokeAPI](http
 - **npm**: v11.4.2
 - **Cocoapods**: v1.16.2
 - **Xcode**: v16.3.0
+- **Visual Studio Code**: v1.102.1 (Universal)
+- **Cursor**: v1.2.4 (Universal)
 
 ### Installation
 
