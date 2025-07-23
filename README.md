@@ -1,97 +1,85 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# PokemonRN
 
-# Getting Started
+A simple React Native app to browse and search Pokémon using the [PokeAPI](https://pokeapi.co/). Built with React Native CLI and TypeScript.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- Browse a list of all Pokémon (fetched from PokeAPI)
+- Search Pokémon by name
+- Tap a Pokémon to view detailed stats and sprite
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Getting Started
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Prerequisites
+- Node.js
+- [Get Started Without a Framework](https://reactnative.dev/docs/getting-started-without-a-framework) (This project doesn’t use Expo.)
+- [CocoaPods](https://cocoapods.org/) (required for iOS development)
 
+## Environments
+
+- **Node.js**: v20.18.0
+- **npm**: v11.4.2
+- **Cocoapods**: v1.16.2
+- **Xcode**: v16.3.0
+
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone git@github.com:Szuyun-3SC/PokemonRN.git
+   cd PokemonRN
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Install CocoaPods:
+   ```sh
+   cd ios && bundle install && bundle exec pod install && cd ..
+   ```
+
+### Running the App
+
+#### Android
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
+#### iOS
 ```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
 npm run ios
+```
+or
+```sh
+npm run ios -- --simulator="iPhone 16 (18.4)"
+```
+to specify a simulator.
 
-# OR using Yarn
-yarn ios
+If everything is set up correctly, the app will launch in your emulator or device.
+
+## Project Structure
+
+```
+src/
+  App.tsx                # App entry point
+  screens/
+    RootView.tsx         # Tab navigation
+    PokemonListScreen/   # Pokémon list & stack navigation
+      PokemonListScreen.tsx
+    PokemonDetailsScreen/
+      PokemonDetailsScreen.tsx
+    ReactNativeScreen/
+      ReactNativeScreen.tsx
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## API
+- [PokeAPI](https://pokeapi.co/)
 
-## Step 3: Modify your app
+## Learning Resources
+- [react-native-community-map](https://github.com/kelset/react-native-community-map)
+- [React Native Documentation](https://reactnative.dev/docs/getting-started)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [React Navigation Docs](https://reactnavigation.org/docs/getting-started)
+- [React Native Best Practices](https://dev.to/hellonehha/react-native-code-practices-6dl)
 
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
