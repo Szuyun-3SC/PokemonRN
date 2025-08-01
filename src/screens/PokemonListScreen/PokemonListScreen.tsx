@@ -6,6 +6,7 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PokemonDetailsScreen from '../PokemonDetailsScreen/PokemonDetailsScreen';
@@ -56,20 +57,19 @@ const PokemonListScreen = ({ navigation }: any) => {
       onPress={() =>
         navigation.navigate('PokemonDetail', { name: item.name, url: item.url })
       }
-      style={{ paddingVertical: 16, paddingHorizontal: 20 }}
     >
-      <Text style={{ fontSize: 18 }}>{item.name}</Text>
+      <Text style={styles.name}>{item.name}</Text>
     </TouchableOpacity>
   );
 
-  const ItemSeparator = () => (
+  const separator = () => (
     <View
-      style={{ height: 1, backgroundColor: '#e0e0e0', marginHorizontal: 10 }}
+      style={styles.separator}
     />
   );
 
   return (
-    <>
+    <View>
       <SearchBar
         placeholder="Search Pokémon..."
         onChangeText={setSearch as any}
@@ -77,19 +77,37 @@ const PokemonListScreen = ({ navigation }: any) => {
         lightTheme
         round
         platform="default"
-        containerStyle={{ backgroundColor: 'white' }}
-        inputContainerStyle={{ backgroundColor: '#eee' }}
+        containerStyle={styles.container}
+        inputContainerStyle={styles.searchBar}
         showLoading={false}
-        cancelButtonTitle={''}
-        showCancel={true}
       />
       <FlatList<Pokemon>
         data={filteredPokemons}
         keyExtractor={item => item.name}
         renderItem={renderItem}
-        ItemSeparatorComponent={ItemSeparator}
-        contentContainerStyle={{ backgroundColor: '#fff', paddingVertical: 8 }}
+        ItemSeparatorComponent={separator}
+        contentContainerStyle={styles.container}
       />
-    </>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+  },
+  searchBar: {
+    backgroundColor: '#eee',
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#e0e0e0',
+    marginHorizontal: 10,
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    margin: 15,
+  },
+});
