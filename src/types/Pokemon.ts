@@ -1,4 +1,4 @@
-import { NamedAPIResource } from './NamedAPIResource';
+import { NamedAPIResource } from "./NamedAPIResource"; '../namedAPIResource';
 
 export interface Ability {
   ability: NamedAPIResource | null; // null possible in past_abilities
@@ -103,24 +103,24 @@ export interface TypeSlot {
 }
 
 export interface Pokemon {
-  abilities: Ability[];
-  base_experience: number;
-  cries: PokemonCries;
-  forms: NamedAPIResource[];
-  game_indices: VersionGameIndex[];
-  height: number;
-  held_items: HeldItem[];
-  id: number;
-  is_default: boolean;
+  // abilities: Ability[];
+  // base_experience: number;
+  // cries: PokemonCries;
+  // forms: NamedAPIResource[];
+  // game_indices: VersionGameIndex[];
+  // height: number;
+  // held_items: HeldItem[];
+  // id: number;
+  // is_default: boolean;
   location_area_encounters: string;
-  moves: Move[];
+  // moves: Move[];
   name: string;
-  order: number;
-  past_abilities: PastAbility[];
-  past_types: any[]; // define if needed
-  species: NamedAPIResource;
-  sprites: Sprites;
+  // order: number;
+  // past_abilities: PastAbility[];
+  // past_types: any[]; // define if needed
+  // species: NamedAPIResource;
+  // sprites: Sprites;
   stats: Stat[];
-  types: TypeSlot[];
-  weight: number;
+  // types: TypeSlot[];
+  // weight: number;
 }

@@ -19,7 +19,9 @@ export default function PokemonDetailsScreen({ route, navigation }: any) {
 const PokemonDetailScreen = ({ route, navigation }: any) => {
   const { name, url } = route.params;
   const [pokemon, setPokemon] = React.useState<Pokemon | null>(null);
-  const [locations, setLocations] = React.useState<EncounterLocation[] | null>(null);
+  const [locations, setLocations] = React.useState<EncounterLocation[] | null>(
+    null,
+  );
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<null | Error>(null);
   const [isLoadingLocations, setIsLoadingLocations] = React.useState(true);
@@ -38,7 +40,7 @@ const PokemonDetailScreen = ({ route, navigation }: any) => {
   React.useEffect(() => {
     navigation.setOptions({ title: name });
 
-    const fetchData = async () => {
+    const fetchData = async (url: String) => {
       try {
         const pokemonDetail = await fetchPokemonDetail(url);
         setPokemon(pokemonDetail);
@@ -63,25 +65,24 @@ const PokemonDetailScreen = ({ route, navigation }: any) => {
       }
     };
 
-    fetchData();
+    fetchData(url);
   }, [url]);
 
-  if (loading) return <ActivityIndicator size="large" style={{ flex: 1 }} />;
-  if (error && loading)
-    return (
+  return loading ? (
+    <ActivityIndicator size="large" style={{ flex: 1 }} />
+  ) : (
+    error ? (
       <Text style={styles.errorText}>
-        Error loading Pokémon details. Error: {error?.message} Pokemon:{' '}
+        Error loading Pokémon details. Error: {error?.message} Pokémon:{' '}
         {pokemon?.name || 'Unknown'}
       </Text>
-    );
-
-  if (pokemon) {
-    return (
-      <ScrollView contentContainerStyle={styles.container}>
-        {pokemon.sprites?.front_default && (
-          <Image
-            source={{ uri: pokemon.sprites.front_default }}
-            style={styles.sprite}
+    ) : (
+      pokemon && (
+        <ScrollView contentContainerStyle={styles.container}>
+          {pokemon.sprites?.front_default && (
+            <Image
+              source={{ uri: pokemon.sprites.front_default }}
+              style={styles.sprite}
             resizeMode="contain"
           />
         )}
@@ -107,14 +108,13 @@ const PokemonDetailScreen = ({ route, navigation }: any) => {
                 </Text>
               </View>
             ))
-          ))
-        }
+          ))}
         <Overlay isVisible={loading}>
           <ActivityIndicator size="large" />
         </Overlay>
       </ScrollView>
-    );
-  }
+    )
+  ));
 };
 
 const styles = StyleSheet.create({
